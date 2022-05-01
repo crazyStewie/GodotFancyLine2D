@@ -2,21 +2,19 @@
 
 importer="texture_array"
 type="TextureArray"
-path.s3tc="res://.import/color_array.png-ce8ed2d7abf52e3adf9331fb1234f147.s3tc.texarr"
-path.etc2="res://.import/color_array.png-ce8ed2d7abf52e3adf9331fb1234f147.etc2.texarr"
+path="res://.import/color_array.png-ce8ed2d7abf52e3adf9331fb1234f147.texarr"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://textures/color_array.png"
-dest_files=[ "res://.import/color_array.png-ce8ed2d7abf52e3adf9331fb1234f147.s3tc.texarr", "res://.import/color_array.png-ce8ed2d7abf52e3adf9331fb1234f147.etc2.texarr" ]
+dest_files=[ "res://.import/color_array.png-ce8ed2d7abf52e3adf9331fb1234f147.texarr" ]
 
 [params]
 
-compress/mode=1
+compress/mode=2
 compress/no_bptc_if_rgb=false
 flags/repeat=1
 flags/filter=true
