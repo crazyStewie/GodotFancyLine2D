@@ -1,0 +1,25 @@
+[remap]
+
+importer="texture_array"
+type="TextureArray"
+path="res://.import/normal_array.png-60524464bcefe28bd43cf401f76e85a4.texarr"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://textures/normal_array.png"
+dest_files=[ "res://.import/normal_array.png-60524464bcefe28bd43cf401f76e85a4.texarr" ]
+
+[params]
+
+compress/mode=0
+compress/no_bptc_if_rgb=false
+flags/repeat=1
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=true
+flags/srgb=2
+slices/horizontal=2
+slices/vertical=2

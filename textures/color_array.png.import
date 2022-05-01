@@ -1,0 +1,27 @@
+[remap]
+
+importer="texture_array"
+type="TextureArray"
+path.s3tc="res://.import/color_array.png-ce8ed2d7abf52e3adf9331fb1234f147.s3tc.texarr"
+path.etc2="res://.import/color_array.png-ce8ed2d7abf52e3adf9331fb1234f147.etc2.texarr"
+metadata={
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
+}
+
+[deps]
+
+source_file="res://textures/color_array.png"
+dest_files=[ "res://.import/color_array.png-ce8ed2d7abf52e3adf9331fb1234f147.s3tc.texarr", "res://.import/color_array.png-ce8ed2d7abf52e3adf9331fb1234f147.etc2.texarr" ]
+
+[params]
+
+compress/mode=1
+compress/no_bptc_if_rgb=false
+flags/repeat=1
+flags/filter=true
+flags/mipmaps=true
+flags/anisotropic=true
+flags/srgb=2
+slices/horizontal=2
+slices/vertical=2

@@ -1,0 +1,923 @@
+[gd_scene load_steps=43 format=2]
+
+[ext_resource path="res://light_soft.png" type="Texture" id=1]
+[ext_resource path="res://NormalLine2D.gd" type="Script" id=2]
+[ext_resource path="res://textures/color_array.png" type="TextureArray" id=3]
+[ext_resource path="res://Path2D.gd" type="Script" id=4]
+[ext_resource path="res://textures/normal_array.png" type="TextureArray" id=5]
+[ext_resource path="res://textures/displacement_packed.png" type="Texture" id=6]
+[ext_resource path="res://FollowLight.gd" type="Script" id=7]
+[ext_resource path="res://Normal.gdshader" type="Shader" id=8]
+
+[sub_resource type="Environment" id=3]
+background_mode = 4
+tonemap_mode = 4
+auto_exposure_scale = 0.1
+glow_enabled = true
+glow_intensity = 0.18
+
+[sub_resource type="Animation" id=8]
+resource_name = "New Anim"
+length = 10.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Lights:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Lights:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Curve2D" id=6]
+bake_interval = 8.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 64, 64, -46.6691, -43.8406, 46.6691, 43.8406, 48, 296, 0, 0, 0, 0, 192, 320 )
+}
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 8 )
+shader_param/INDEX_TRLB = Plane( 0, 1, 2, 3 )
+shader_param/UVX_SCALE = 8.0
+shader_param/COLOR_ARRAY = ExtResource( 3 )
+shader_param/NORMAL_ARRAY = ExtResource( 5 )
+shader_param/DEPTH_PACKED = ExtResource( 6 )
+
+[sub_resource type="Gradient" id=40]
+offsets = PoolRealArray( 0, 1, 0.0204992, 0.0409575, 0.0614079, 0.0818596, 0.102361, 0.122791, 0.143238, 0.163755, 0.184192, 0.204673, 0.225138, 0.245627, 0.26612, 0.286606, 0.307163, 0.327713, 0.348177, 0.368716, 0.389245, 0.409753, 0.430295, 0.450759, 0.471241, 0.491665, 0.512134, 0.532575, 0.553015, 0.57347, 0.593964, 0.614426, 0.634886, 0.65541, 0.675855, 0.696367, 0.716855, 0.737344, 0.757782, 0.778243, 0.798685, 0.81919, 0.839669, 0.860139, 0.880613, 0.901058, 0.921551, 0.942003, 0.962474, 0.982944 )
+colors = PoolColorArray( 0.348056, 0.976354, 0.023646, 0.348056, 0.992695, 0.414842, 0.585158, 0.992695, 0.35105, 0.977298, 0.0227015, 0.35105, 0.356373, 0.978927, 0.0210728, 0.356373, 0.36085, 0.980247, 0.0197528, 0.36085, 0.3651, 0.981458, 0.0185418, 0.3651, 0.369296, 0.982614, 0.0173858, 0.369296, 0.373528, 0.983741, 0.0162595, 0.373528, 0.377866, 0.984854, 0.0151461, 0.377866, 0.382363, 0.985965, 0.0140355, 0.382363, 0.387061, 0.987078, 0.0129221, 0.387061, 0.39201, 0.988199, 0.0118011, 0.39201, 0.397263, 0.989331, 0.0106687, 0.397263, 0.402877, 0.990476, 0.00952363, 0.402877, 0.408913, 0.991633, 0.00836679, 0.408913, 0.415453, 0.9928, 0.00719994, 0.415453, 0.422595, 0.993972, 0.00602794, 0.422595, 0.430433, 0.995137, 0.00486326, 0.430433, 0.439097, 0.996277, 0.003723, 0.439097, 0.448776, 0.997369, 0.00263089, 0.448776, 0.459686, 0.998372, 0.00162789, 0.459686, 0.472107, 0.999221, 0.000778615, 0.472107, 0.486413, 0.999815, 0.000184685, 0.486413, 0.503092, 0.99999, 9.56655e-06, 0.503092, 0.522829, 0.999479, 0.000521481, 0.522829, 0.546589, 0.997825, 0.00217527, 0.546589, 0.575735, 0.994231, 0.00576904, 0.575735, 0.612139, 0.987263, 0.0127373, 0.612139, 0.658288, 0.974283, 0.0257165, 0.658288, 0.716928, 0.950491, 0.0495089, 0.716928, 0.788893, 0.908094, 0.0919059, 0.788893, 0.855416, 0.851681, 0.148319, 0.855416, 0.897631, 0.803134, 0.196866, 0.897631, 0.924265, 0.764573, 0.235427, 0.924265, 0.945173, 0.727642, 0.272358, 0.945173, 0.96118, 0.693167, 0.306833, 0.96118, 0.973191, 0.661525, 0.338475, 0.973191, 0.982042, 0.632799, 0.367201, 0.982042, 0.988453, 0.606833, 0.393167, 0.988453, 0.993003, 0.583356, 0.416644, 0.993003, 0.996133, 0.562065, 0.437935, 0.996133, 0.998176, 0.542667, 0.457333, 0.998176, 0.999379, 0.524903, 0.475097, 0.999379, 0.999927, 0.508527, 0.491473, 0.999927, 0.999955, 0.493288, 0.506712, 0.999955, 0.999556, 0.47894, 0.52106, 0.999556, 0.998788, 0.465211, 0.534789, 0.998788, 0.997669, 0.451771, 0.548229, 0.997669, 0.996145, 0.438034, 0.561966, 0.996145, 0.994021, 0.42291, 0.57709, 0.994021 )
+
+[sub_resource type="Curve2D" id=12]
+bake_interval = 8.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 64, 64, 0, 0, 46.6691, 43.8406, 64, 320 )
+}
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 8 )
+shader_param/INDEX_TRLB = Plane( 0, 1, 2, 3 )
+shader_param/UVX_SCALE = 5.0
+shader_param/COLOR_ARRAY = ExtResource( 3 )
+shader_param/NORMAL_ARRAY = ExtResource( 5 )
+shader_param/DEPTH_PACKED = ExtResource( 6 )
+
+[sub_resource type="Gradient" id=41]
+offsets = PoolRealArray( 0, 1, 0.0313015, 0.0625167, 0.0938078, 0.124982, 0.15614, 0.187447, 0.218589, 0.249827, 0.28095, 0.312224, 0.343583, 0.37471, 0.405873, 0.437087, 0.468232, 0.499488, 0.530598, 0.561749, 0.592974, 0.624151, 0.655437, 0.686817, 0.717984, 0.749142, 0.780422, 0.811614, 0.84276, 0.874008, 0.905202, 0.936497, 0.967749, 0.999007 )
+colors = PoolColorArray( 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5, 0.5, 1, 0, 0.5 )
+
+[sub_resource type="GDScript" id=15]
+script/source = "tool
+extends Line2D
+
+export var corner_radius : float = 8.0 setget set_corner_radius
+
+var length_until : PoolRealArray = PoolRealArray()
+func _init():
+	if not is_connected(\"draw\", self, \"on_draw\"):
+		connect(\"draw\", self, \"on_draw\")
+
+func set_corner_radius(value : float):
+	corner_radius = max(value, 0.0)
+
+func on_draw():
+	if not Engine.editor_hint:
+		return
+#	print(\"updating\")
+	if points.size() < 2:
+		return
+	var length = calculate_length()
+	var new_gradient = Gradient.new()
+	var tg : Vector2 = (points[1] - points[0]).normalized()
+	var bn : Vector2 = tg.rotated(PI*0.5)
+	new_gradient.set_color(0, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5))
+	tg = (points[-1] - points[-2]).normalized()
+	bn = tg.rotated(PI*0.5)
+	new_gradient.set_color(1, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5));
+#	for i in points.size() - 1:
+#		var idx = i + 1;
+#		tg = (points[idx] - points[idx - 1]).normalized()
+#		bn = tg.rotated(PI*0.5)
+#		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+#		var seg_length = length_until[idx] - length_until[idx - 1]
+#		if seg_length <= 2.0*corner_radius:
+#			new_gradient.add_point((length_until[idx] - seg_length*0.5)/length, color_value)
+#		else:
+#			new_gradient.add_point((length_until[idx - 1] + corner_radius)/length, color_value)
+#			new_gradient.add_point((length_until[idx] - corner_radius)/length, color_value)
+	for i in points.size() - 2:
+		var idx = i + 1;
+		var tg_a = (points[idx] - points[idx - 1]).normalized()
+		var tg_b = (points[idx + 1] - points[idx]).normalized()
+		tg = (tg_a + tg_b).normalized()
+		bn = tg.rotated(PI*0.5)
+		var offset = length_until[idx]/length
+		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+		new_gradient.add_point(offset, color_value)
+	gradient = new_gradient
+	(material as ShaderMaterial).set_shader_param(\"UVX_SCALE\", round(length/(width*PI*0.5)))
+	pass
+
+
+func calculate_length() -> float:
+	var result : float = 0.0
+	length_until.resize(points.size())
+	length_until[0] = 0.0
+	for i in points.size() - 1:
+		result += points[i].distance_to(points[i + 1])
+		length_until[i + 1] = result
+	return result
+"
+
+[sub_resource type="Curve2D" id=16]
+bake_interval = 8.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 64, 320, -83.3772, -0.458328, 83.3772, 0.458328, 96, 64, -73.6222, -0.943874, 73.6222, 0.943874, 176, 320, 0, 0, 0, 0, 192, 64 )
+}
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = ExtResource( 8 )
+shader_param/INDEX_TRLB = Plane( 0, 1, 2, 3 )
+shader_param/UVX_SCALE = 17.0
+shader_param/COLOR_ARRAY = ExtResource( 3 )
+shader_param/NORMAL_ARRAY = ExtResource( 5 )
+shader_param/DEPTH_PACKED = ExtResource( 6 )
+
+[sub_resource type="Gradient" id=42]
+offsets = PoolRealArray( 0, 1, 0.00945346, 0.0189201, 0.0283908, 0.0378378, 0.0472687, 0.0567338, 0.0662136, 0.0756802, 0.0851054, 0.0945285, 0.104012, 0.113463, 0.122921, 0.132392, 0.141882, 0.151316, 0.160793, 0.170281, 0.179706, 0.189166, 0.198624, 0.208043, 0.217507, 0.227003, 0.236437, 0.245863, 0.255314, 0.264769, 0.274257, 0.283705, 0.293159, 0.302612, 0.312097, 0.321567, 0.331042, 0.340508, 0.349961, 0.3594, 0.368856, 0.378331, 0.38782, 0.397292, 0.40674, 0.416219, 0.425705, 0.435153, 0.444609, 0.454056, 0.463528, 0.473024, 0.482461, 0.491932, 0.501404, 0.510887, 0.52035, 0.529845, 0.539338, 0.548791, 0.55829, 0.567786, 0.577266, 0.586743, 0.596218, 0.605666, 0.615142, 0.624621, 0.634068, 0.643539, 0.652985, 0.662464, 0.671919, 0.681365, 0.690815, 0.700275, 0.709743, 0.71919, 0.728675, 0.738135, 0.747626, 0.757079, 0.766563, 0.775986, 0.785432, 0.794882, 0.804369, 0.813804, 0.823235, 0.832667, 0.842157, 0.851627, 0.861089, 0.870512, 0.879994, 0.889496, 0.898934, 0.908392, 0.917854, 0.927295, 0.936787, 0.94622, 0.95566, 0.965121, 0.974585, 0.984031, 0.993488 )
+colors = PoolColorArray( 0.407553, 0.0086208, 0.991379, 0.407553, 0.394639, 0.011227, 0.988773, 0.394639, 0.410384, 0.00809664, 0.991903, 0.410384, 0.415399, 0.00720936, 0.992791, 0.415399, 0.419582, 0.00650942, 0.993491, 0.419582, 0.423514, 0.00588474, 0.994115, 0.423514, 0.427364, 0.0053041, 0.994696, 0.427364, 0.431228, 0.0047521, 0.995248, 0.431228, 0.435162, 0.00422183, 0.995778, 0.435162, 0.439197, 0.00371072, 0.996289, 0.439198, 0.44337, 0.00321737, 0.996783, 0.44337, 0.447726, 0.00274003, 0.99726, 0.447727, 0.452314, 0.00227913, 0.997721, 0.452314, 0.457164, 0.00183833, 0.998162, 0.457164, 0.462318, 0.00142193, 0.998578, 0.462318, 0.467838, 0.00103548, 0.998965, 0.467838, 0.473773, 0.000688314, 0.999312, 0.473773, 0.480185, 0.000392765, 0.999607, 0.480185, 0.487173, 0.000164539, 0.999835, 0.487173, 0.494831, 2.67029e-05, 0.999973, 0.494831, 0.503265, 1.06394e-05, 0.999989, 0.503265, 0.512649, 0.000160009, 0.99984, 0.512649, 0.523174, 0.000537336, 0.999463, 0.523174, 0.535087, 0.00123259, 0.998767, 0.535087, 0.548762, 0.00238341, 0.997617, 0.548762, 0.564633, 0.00419506, 0.995805, 0.564633, 0.583235, 0.00697669, 0.993023, 0.583235, 0.605399, 0.0112352, 0.988765, 0.605399, 0.632315, 0.017825, 0.982175, 0.632315, 0.665579, 0.0282122, 0.971788, 0.665579, 0.707206, 0.0449555, 0.955045, 0.707206, 0.75929, 0.0724852, 0.927515, 0.75929, 0.822555, 0.117955, 0.882045, 0.822555, 0.892241, 0.189925, 0.810075, 0.892241, 0.953949, 0.290404, 0.709596, 0.953949, 0.990904, 0.40506, 0.59494, 0.990904, 0.999712, 0.51696, 0.48304, 0.999712, 0.981963, 0.633086, 0.366914, 0.981963, 0.931211, 0.753096, 0.246904, 0.93121, 0.85566, 0.851434, 0.148566, 0.85566, 0.778219, 0.915444, 0.0845555, 0.778219, 0.713593, 0.952082, 0.047918, 0.713593, 0.66392, 0.972367, 0.0276333, 0.66392, 0.6264, 0.983759, 0.0162406, 0.6264, 0.597795, 0.990343, 0.00965711, 0.597795, 0.575604, 0.994251, 0.00574899, 0.575604, 0.558162, 0.996606, 0.00339434, 0.558162, 0.544336, 0.99803, 0.00196958, 0.544336, 0.533305, 0.99889, 0.00111046, 0.533305, 0.524498, 0.999399, 0.000600576, 0.524499, 0.517513, 0.999693, 0.000306815, 0.517512, 0.51208, 0.999854, 0.000145942, 0.51208, 0.508013, 0.999936, 6.4224e-05, 0.508013, 0.505164, 0.999973, 2.66731e-05, 0.505164, 0.503448, 0.999988, 1.18911e-05, 0.503448, 0.502825, 0.999992, 7.98702e-06, 0.502825, 0.503288, 0.999989, 1.08182e-05, 0.503288, 0.504875, 0.999976, 2.37525e-05, 0.504875, 0.507659, 0.999941, 5.8651e-05, 0.507659, 0.511766, 0.999862, 0.000138462, 0.511766, 0.517398, 0.999697, 0.000302792, 0.517398, 0.524832, 0.999383, 0.000617027, 0.524832, 0.534465, 0.998811, 0.00118929, 0.534465, 0.546887, 0.997797, 0.00220323, 0.546887, 0.562962, 0.99602, 0.0039801, 0.562962, 0.584024, 0.992889, 0.00711063, 0.584024, 0.612193, 0.98725, 0.0127499, 0.612193, 0.650743, 0.976735, 0.0232648, 0.650743, 0.70463, 0.956209, 0.043791, 0.70463, 0.779465, 0.914608, 0.0853924, 0.779465, 0.872708, 0.8333, 0.1667, 0.872708, 0.956743, 0.703434, 0.296566, 0.956743, 0.997007, 0.554626, 0.445374, 0.997007, 0.991532, 0.408368, 0.591632, 0.991532, 0.940909, 0.264205, 0.735795, 0.940909, 0.856613, 0.149533, 0.850467, 0.856613, 0.771767, 0.0803063, 0.919694, 0.771767, 0.704026, 0.0435205, 0.95648, 0.704026, 0.653292, 0.0240781, 0.975922, 0.653292, 0.615092, 0.0134264, 0.986574, 0.615092, 0.585615, 0.00738439, 0.992616, 0.585615, 0.562239, 0.00388882, 0.996111, 0.562239, 0.543236, 0.00187287, 0.998127, 0.543236, 0.527465, 0.000754893, 0.999245, 0.527465, 0.514112, 0.000199199, 0.999801, 0.514112, 0.502601, 6.76513e-06, 0.999993, 0.502601, 0.49256, 5.53429e-05, 0.999945, 0.49256, 0.48372, 0.000265092, 0.999735, 0.48372, 0.475854, 0.00058338, 0.999417, 0.475854, 0.468768, 0.000976384, 0.999024, 0.468768, 0.462327, 0.00142127, 0.998579, 0.462327, 0.456444, 0.00190067, 0.998099, 0.456444, 0.451045, 0.0024024, 0.997598, 0.451045, 0.446052, 0.00291893, 0.997081, 0.446052, 0.441391, 0.00344691, 0.996553, 0.441391, 0.437021, 0.00398222, 0.996018, 0.437021, 0.432914, 0.00452092, 0.995479, 0.432914, 0.429026, 0.00506291, 0.994937, 0.429026, 0.425317, 0.00560904, 0.994391, 0.425317, 0.421755, 0.00616017, 0.99384, 0.421755, 0.418308, 0.00671867, 0.993281, 0.418308, 0.414947, 0.00728706, 0.992713, 0.414947, 0.41163, 0.00787118, 0.992129, 0.41163, 0.408294, 0.00848195, 0.991518, 0.408294, 0.404854, 0.00913623, 0.990864, 0.404854, 0.401123, 0.00987417, 0.990126, 0.401123, 0.396894, 0.0107462, 0.989254, 0.396894 )
+
+[sub_resource type="GDScript" id=19]
+script/source = "tool
+extends Line2D
+
+export var corner_radius : float = 8.0 setget set_corner_radius
+
+var length_until : PoolRealArray = PoolRealArray()
+func _init():
+	if not is_connected(\"draw\", self, \"on_draw\"):
+		connect(\"draw\", self, \"on_draw\")
+
+func set_corner_radius(value : float):
+	corner_radius = max(value, 0.0)
+
+func on_draw():
+	if not Engine.editor_hint:
+		return
+#	print(\"updating\")
+	if points.size() < 2:
+		return
+	var length = calculate_length()
+	var new_gradient = Gradient.new()
+	var tg : Vector2 = (points[1] - points[0]).normalized()
+	var bn : Vector2 = tg.rotated(PI*0.5)
+	new_gradient.set_color(0, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5))
+	tg = (points[-1] - points[-2]).normalized()
+	bn = tg.rotated(PI*0.5)
+	new_gradient.set_color(1, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5));
+#	for i in points.size() - 1:
+#		var idx = i + 1;
+#		tg = (points[idx] - points[idx - 1]).normalized()
+#		bn = tg.rotated(PI*0.5)
+#		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+#		var seg_length = length_until[idx] - length_until[idx - 1]
+#		if seg_length <= 2.0*corner_radius:
+#			new_gradient.add_point((length_until[idx] - seg_length*0.5)/length, color_value)
+#		else:
+#			new_gradient.add_point((length_until[idx - 1] + corner_radius)/length, color_value)
+#			new_gradient.add_point((length_until[idx] - corner_radius)/length, color_value)
+	for i in points.size() - 2:
+		var idx = i + 1;
+		var tg_a = (points[idx] - points[idx - 1]).normalized()
+		var tg_b = (points[idx + 1] - points[idx]).normalized()
+		tg = (tg_a + tg_b).normalized()
+		bn = tg.rotated(PI*0.5)
+		var offset = length_until[idx]/length
+		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+		new_gradient.add_point(offset, color_value)
+	gradient = new_gradient
+	(material as ShaderMaterial).set_shader_param(\"UVX_SCALE\", round(length/(width*PI*0.5)))
+	pass
+
+
+func calculate_length() -> float:
+	var result : float = 0.0
+	length_until.resize(points.size())
+	length_until[0] = 0.0
+	for i in points.size() - 1:
+		result += points[i].distance_to(points[i + 1])
+		length_until[i + 1] = result
+	return result
+"
+
+[sub_resource type="Curve2D" id=20]
+bake_interval = 8.0
+_data = {
+"points": PoolVector2Array( 64.5902, -1.33635, -64.5902, 1.33635, 160, 320, 1.27721, 138.135, -1.27721, -138.135, 32, 192, -43.654, -0.445449, 43.654, 0.445449, 160, 64 )
+}
+
+[sub_resource type="GDScript" id=21]
+script/source = "tool
+extends Path2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+export var closed_path : bool = true
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+
+func _on_Path2D_draw():
+	var points = curve.get_baked_points()
+	if closed_path:
+		var last = curve.get_point_count() - 1
+		if last > 2:
+			curve.set_point_in(last, -curve.get_point_out(0))
+			curve.set_point_position(last, curve.get_point_position(0))
+		points[-2] = points[-1] + curve.get_point_in(last).normalized()*points[-1].distance_to(points[-2])
+		points.insert(1, points[0] + curve.get_point_out(0).normalized()*points[1].distance_to(points[0])*0.5)
+	$Line2D.points = points
+	pass # Replace with function body.
+"
+
+[sub_resource type="ShaderMaterial" id=22]
+shader = ExtResource( 8 )
+shader_param/INDEX_TRLB = Plane( 0, 1, 2, 3 )
+shader_param/UVX_SCALE = 9.0
+shader_param/COLOR_ARRAY = ExtResource( 3 )
+shader_param/NORMAL_ARRAY = ExtResource( 5 )
+shader_param/DEPTH_PACKED = ExtResource( 6 )
+
+[sub_resource type="Gradient" id=43]
+offsets = PoolRealArray( 0, 1, 0.018486, 0.0369654, 0.0554382, 0.0739225, 0.0924348, 0.110954, 0.129473, 0.147974, 0.16645, 0.184972, 0.203479, 0.221964, 0.24049, 0.258994, 0.277491, 0.295999, 0.314477, 0.333029, 0.351583, 0.370038, 0.388559, 0.407008, 0.425541, 0.444098, 0.462648, 0.481138, 0.499633, 0.518067, 0.536654, 0.555178, 0.573649, 0.592216, 0.610779, 0.629311, 0.647852, 0.66631, 0.684784, 0.703257, 0.72179, 0.740323, 0.758857, 0.777398, 0.795908, 0.814451, 0.832992, 0.851464, 0.869953, 0.888489, 0.906975, 0.925457, 0.943961, 0.96247, 0.98096, 0.999453 )
+colors = PoolColorArray( 0.000145793, 0.512073, 0.487927, 0.000145823, 0.999972, 0.50528, 0.49472, 0.999972, 0.00015524, 0.512459, 0.487542, 0.00015524, 0.000124186, 0.511143, 0.488857, 0.000124186, 3.03984e-05, 0.505514, 0.494486, 3.03984e-05, 2.31862e-05, 0.495185, 0.504815, 2.31862e-05, 0.000417501, 0.479571, 0.520429, 0.000417501, 0.00177124, 0.457951, 0.542049, 0.00177127, 0.00499028, 0.429535, 0.570466, 0.00499028, 0.0114358, 0.393675, 0.606325, 0.0114358, 0.0229535, 0.350245, 0.649755, 0.0229535, 0.0416214, 0.300278, 0.699722, 0.0416214, 0.0689608, 0.246613, 0.753387, 0.0689608, 0.1049, 0.193575, 0.806425, 0.1049, 0.147242, 0.145653, 0.854347, 0.147242, 0.192268, 0.105918, 0.894082, 0.192268, 0.236318, 0.0751804, 0.92482, 0.236318, 0.276933, 0.0525171, 0.947483, 0.276933, 0.313017, 0.0362788, 0.963721, 0.313017, 0.344465, 0.0248066, 0.975193, 0.344465, 0.371586, 0.0167714, 0.983229, 0.371586, 0.394902, 0.0111705, 0.988829, 0.394902, 0.415027, 0.00727326, 0.992727, 0.415027, 0.432497, 0.00457764, 0.995422, 0.432497, 0.447772, 0.00273526, 0.997265, 0.447772, 0.461215, 0.00150657, 0.998493, 0.461215, 0.473091, 0.000724614, 0.999275, 0.473091, 0.483639, 0.000267744, 0.999732, 0.483639, 0.4936, 4.09484e-05, 0.999959, 0.4936, 0.504985, 2.48253e-05, 0.999975, 0.504985, 0.518523, 0.000343204, 0.999657, 0.518523, 0.533575, 0.00112855, 0.998871, 0.533575, 0.550309, 0.00253746, 0.997463, 0.550309, 0.569027, 0.00478759, 0.995212, 0.569027, 0.589992, 0.00816524, 0.991835, 0.589992, 0.613475, 0.0130469, 0.986953, 0.613475, 0.639741, 0.0199246, 0.980075, 0.639741, 0.668989, 0.0294229, 0.970577, 0.668989, 0.701329, 0.0423248, 0.957675, 0.701329, 0.736635, 0.0595412, 0.940459, 0.736635, 0.774333, 0.0819792, 0.918021, 0.774333, 0.813245, 0.110285, 0.889715, 0.813245, 0.851643, 0.144546, 0.855454, 0.851643, 0.887497, 0.184016, 0.815984, 0.887497, 0.918941, 0.227075, 0.772925, 0.918941, 0.94476, 0.271551, 0.728449, 0.94476, 0.96457, 0.315136, 0.684864, 0.96457, 0.978793, 0.355927, 0.644073, 0.978793, 0.988367, 0.392772, 0.607228, 0.988367, 0.994351, 0.425056, 0.574944, 0.994351, 0.997736, 0.452472, 0.547528, 0.997736, 0.999371, 0.474937, 0.525063, 0.999371, 0.999941, 0.492303, 0.507697, 0.999941, 0.999984, 0.504015, 0.495985, 0.999984, 0.999925, 0.508632, 0.491368, 0.999925, 0.99995, 0.507096, 0.492904, 0.99995 )
+
+[sub_resource type="GDScript" id=24]
+script/source = "tool
+extends Line2D
+
+export var corner_radius : float = 8.0 setget set_corner_radius
+
+var length_until : PoolRealArray = PoolRealArray()
+func _init():
+	if not is_connected(\"draw\", self, \"on_draw\"):
+		connect(\"draw\", self, \"on_draw\")
+
+func set_corner_radius(value : float):
+	corner_radius = max(value, 0.0)
+
+func on_draw():
+	if not Engine.editor_hint:
+		return
+#	print(\"updating\")
+	if points.size() < 2:
+		return
+	var length = calculate_length()
+	var new_gradient = Gradient.new()
+	var tg : Vector2 = (points[1] - points[0]).normalized()
+	var bn : Vector2 = tg.rotated(PI*0.5)
+	new_gradient.set_color(0, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5))
+	tg = (points[-1] - points[-2]).normalized()
+	bn = tg.rotated(PI*0.5)
+	new_gradient.set_color(1, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5));
+#	for i in points.size() - 1:
+#		var idx = i + 1;
+#		tg = (points[idx] - points[idx - 1]).normalized()
+#		bn = tg.rotated(PI*0.5)
+#		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+#		var seg_length = length_until[idx] - length_until[idx - 1]
+#		if seg_length <= 2.0*corner_radius:
+#			new_gradient.add_point((length_until[idx] - seg_length*0.5)/length, color_value)
+#		else:
+#			new_gradient.add_point((length_until[idx - 1] + corner_radius)/length, color_value)
+#			new_gradient.add_point((length_until[idx] - corner_radius)/length, color_value)
+	for i in points.size() - 2:
+		var idx = i + 1;
+		var tg_a = (points[idx] - points[idx - 1]).normalized()
+		var tg_b = (points[idx + 1] - points[idx]).normalized()
+		tg = (tg_a + tg_b).normalized()
+		bn = tg.rotated(PI*0.5)
+		var offset = length_until[idx]/length
+		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+		new_gradient.add_point(offset, color_value)
+	gradient = new_gradient
+	(material as ShaderMaterial).set_shader_param(\"UVX_SCALE\", round(length/(width*PI*0.5)))
+	pass
+
+
+func calculate_length() -> float:
+	var result : float = 0.0
+	length_until.resize(points.size())
+	length_until[0] = 0.0
+	for i in points.size() - 1:
+		result += points[i].distance_to(points[i + 1])
+		length_until[i + 1] = result
+	return result
+"
+
+[sub_resource type="Curve2D" id=25]
+bake_interval = 8.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 56, 192, 0, 0, 0, 0, 160, 192 )
+}
+
+[sub_resource type="GDScript" id=26]
+script/source = "tool
+extends Path2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+export var closed_path : bool = true
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+
+func _on_Path2D_draw():
+	var points = curve.get_baked_points()
+	if closed_path:
+		var last = curve.get_point_count() - 1
+		if last > 2:
+			curve.set_point_in(last, -curve.get_point_out(0))
+			curve.set_point_position(last, curve.get_point_position(0))
+		points[-2] = points[-1] + curve.get_point_in(last).normalized()*points[-1].distance_to(points[-2])
+		points.insert(1, points[0] + curve.get_point_out(0).normalized()*points[1].distance_to(points[0])*0.5)
+	$Line2D.points = points
+	pass # Replace with function body.
+"
+
+[sub_resource type="ShaderMaterial" id=27]
+shader = ExtResource( 8 )
+shader_param/INDEX_TRLB = Plane( 0, 1, 2, 3 )
+shader_param/UVX_SCALE = 2.0
+shader_param/COLOR_ARRAY = ExtResource( 3 )
+shader_param/NORMAL_ARRAY = ExtResource( 5 )
+shader_param/DEPTH_PACKED = ExtResource( 6 )
+
+[sub_resource type="Gradient" id=44]
+offsets = PoolRealArray( 0, 1, 0.0768906, 0.153895, 0.230802, 0.307715, 0.384624, 0.461582, 0.538638, 0.615448, 0.692353, 0.769262, 0.846269, 0.923151 )
+colors = PoolColorArray( 1, 0.499999, 0.500001, 1, 1, 0.5, 0.5, 1, 1, 0.500001, 0.499999, 1, 1, 0.500001, 0.499999, 1, 1, 0.5, 0.5, 1, 1, 0.499999, 0.500001, 1, 1, 0.5, 0.5, 1, 1, 0.5, 0.499999, 1, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 1 )
+
+[sub_resource type="GDScript" id=29]
+script/source = "tool
+extends Line2D
+
+export var corner_radius : float = 8.0 setget set_corner_radius
+
+var length_until : PoolRealArray = PoolRealArray()
+func _init():
+	if not is_connected(\"draw\", self, \"on_draw\"):
+		connect(\"draw\", self, \"on_draw\")
+
+func set_corner_radius(value : float):
+	corner_radius = max(value, 0.0)
+
+func on_draw():
+	if not Engine.editor_hint:
+		return
+#	print(\"updating\")
+	if points.size() < 2:
+		return
+	var length = calculate_length()
+	var new_gradient = Gradient.new()
+	var tg : Vector2 = (points[1] - points[0]).normalized()
+	var bn : Vector2 = tg.rotated(PI*0.5)
+	new_gradient.set_color(0, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5))
+	tg = (points[-1] - points[-2]).normalized()
+	bn = tg.rotated(PI*0.5)
+	new_gradient.set_color(1, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5));
+#	for i in points.size() - 1:
+#		var idx = i + 1;
+#		tg = (points[idx] - points[idx - 1]).normalized()
+#		bn = tg.rotated(PI*0.5)
+#		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+#		var seg_length = length_until[idx] - length_until[idx - 1]
+#		if seg_length <= 2.0*corner_radius:
+#			new_gradient.add_point((length_until[idx] - seg_length*0.5)/length, color_value)
+#		else:
+#			new_gradient.add_point((length_until[idx - 1] + corner_radius)/length, color_value)
+#			new_gradient.add_point((length_until[idx] - corner_radius)/length, color_value)
+	for i in points.size() - 2:
+		var idx = i + 1;
+		var tg_a = (points[idx] - points[idx - 1]).normalized()
+		var tg_b = (points[idx + 1] - points[idx]).normalized()
+		tg = (tg_a + tg_b).normalized()
+		bn = tg.rotated(PI*0.5)
+		var offset = length_until[idx]/length
+		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+		new_gradient.add_point(offset, color_value)
+	gradient = new_gradient
+	(material as ShaderMaterial).set_shader_param(\"UVX_SCALE\", round(length/(width*PI*0.5)))
+	pass
+
+
+func calculate_length() -> float:
+	var result : float = 0.0
+	length_until.resize(points.size())
+	length_until[0] = 0.0
+	for i in points.size() - 1:
+		result += points[i].distance_to(points[i + 1])
+		length_until[i + 1] = result
+	return result
+"
+
+[sub_resource type="Curve2D" id=30]
+bake_interval = 8.0
+_data = {
+"points": PoolVector2Array( -149.849, 35.9188, 149.849, -35.9188, 224, 72, 29.1037, -43.0631, -29.1037, 43.0631, 352, 168, 1.12246, -63.4191, -1.12246, 63.4191, 224, 296, 0, 0, 0, 0, 352, 320 )
+}
+
+[sub_resource type="GDScript" id=31]
+script/source = "tool
+extends Path2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+export var closed_path : bool = true
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+
+func _on_Path2D_draw():
+	var points = curve.get_baked_points()
+	if closed_path:
+		var last = curve.get_point_count() - 1
+		if last > 2:
+			curve.set_point_in(last, -curve.get_point_out(0))
+			curve.set_point_position(last, curve.get_point_position(0))
+		points[-2] = points[-1] + curve.get_point_in(last).normalized()*points[-1].distance_to(points[-2])
+		points.insert(1, points[0] + curve.get_point_out(0).normalized()*points[1].distance_to(points[0])*0.5)
+	$Line2D.points = points
+	pass # Replace with function body.
+"
+
+[sub_resource type="ShaderMaterial" id=32]
+shader = ExtResource( 8 )
+shader_param/INDEX_TRLB = Plane( 0, 1, 2, 3 )
+shader_param/UVX_SCALE = 11.0
+shader_param/COLOR_ARRAY = ExtResource( 3 )
+shader_param/NORMAL_ARRAY = ExtResource( 5 )
+shader_param/DEPTH_PACKED = ExtResource( 6 )
+
+[sub_resource type="Gradient" id=45]
+offsets = PoolRealArray( 0, 1, 0.0143576, 0.028727, 0.0430907, 0.0573921, 0.0717728, 0.0861525, 0.100513, 0.114885, 0.129175, 0.143543, 0.157872, 0.172234, 0.186602, 0.200932, 0.215289, 0.229621, 0.243932, 0.25824, 0.272545, 0.286865, 0.301223, 0.315543, 0.329893, 0.344237, 0.358591, 0.372917, 0.387233, 0.401588, 0.415928, 0.430236, 0.444596, 0.45891, 0.473263, 0.487624, 0.501932, 0.516277, 0.530581, 0.544914, 0.559279, 0.573645, 0.587947, 0.602298, 0.616639, 0.630952, 0.645296, 0.659657, 0.673972, 0.688304, 0.702642, 0.716961, 0.731286, 0.745644, 0.759964, 0.774313, 0.788626, 0.802957, 0.81727, 0.831624, 0.845964, 0.860298, 0.874623, 0.888924, 0.903255, 0.917585, 0.931938, 0.94625, 0.960577, 0.97489, 0.989234 )
+colors = PoolColorArray( 0.987391, 0.38842, 0.61158, 0.987391, 0.981165, 0.364058, 0.635942, 0.981165, 0.988571, 0.393708, 0.606292, 0.988571, 0.990861, 0.404841, 0.595159, 0.990861, 0.993085, 0.417129, 0.582871, 0.993084, 0.995184, 0.430767, 0.569233, 0.995184, 0.997079, 0.44603, 0.55397, 0.997079, 0.998644, 0.463199, 0.536801, 0.998644, 0.999697, 0.482605, 0.517395, 0.999697, 0.999978, 0.504645, 0.495355, 0.999978, 0.99911, 0.529826, 0.470174, 0.99911, 0.996533, 0.558783, 0.441217, 0.996533, 0.991432, 0.592164, 0.407836, 0.991432, 0.982641, 0.630606, 0.369394, 0.982641, 0.96856, 0.674505, 0.325495, 0.96856, 0.947175, 0.723683, 0.276317, 0.947175, 0.916274, 0.776976, 0.223024, 0.916274, 0.874186, 0.83164, 0.16836, 0.874186, 0.820797, 0.883522, 0.116478, 0.820797, 0.758257, 0.928139, 0.0718608, 0.758257, 0.69066, 0.962222, 0.0377783, 0.69066, 0.622529, 0.984754, 0.0152458, 0.622529, 0.557369, 0.996698, 0.00330213, 0.557369, 0.497002, 0.999991, 9.0301e-06, 0.497002, 0.44167, 0.996586, 0.00341401, 0.44167, 0.39071, 0.98791, 0.0120904, 0.39071, 0.343057, 0.97473, 0.0252698, 0.343057, 0.297448, 0.957135, 0.0428647, 0.297448, 0.252301, 0.934333, 0.0656669, 0.252301, 0.205727, 0.904232, 0.0957679, 0.205727, 0.164115, 0.87038, 0.12962, 0.164115, 0.133946, 0.840594, 0.159406, 0.133946, 0.113149, 0.816775, 0.183225, 0.113149, 0.0988047, 0.7984, 0.201601, 0.0988047, 0.0889768, 0.78471, 0.21529, 0.0889768, 0.0824331, 0.775023, 0.224977, 0.0824331, 0.0784105, 0.768816, 0.231184, 0.0784104, 0.0764426, 0.765705, 0.234295, 0.0764426, 0.0762814, 0.765448, 0.234552, 0.0762814, 0.0778445, 0.767927, 0.232073, 0.0778444, 0.0811889, 0.773125, 0.226875, 0.0811888, 0.0865075, 0.781112, 0.218888, 0.0865075, 0.0941443, 0.792029, 0.207971, 0.0941442, 0.104647, 0.806098, 0.193902, 0.104647, 0.118787, 0.823537, 0.176463, 0.118787, 0.137623, 0.844504, 0.155496, 0.137623, 0.162577, 0.86898, 0.13102, 0.162577, 0.195267, 0.896406, 0.103594, 0.195267, 0.23717, 0.925347, 0.0746526, 0.23717, 0.289018, 0.953306, 0.0466936, 0.289018, 0.34971, 0.976878, 0.0231216, 0.34971, 0.415733, 0.992848, 0.00715211, 0.415733, 0.488033, 0.999857, 0.00014323, 0.488033, 0.582489, 0.993149, 0.00685135, 0.582489, 0.702825, 0.957014, 0.0429857, 0.702825, 0.821326, 0.883079, 0.116921, 0.821326, 0.908169, 0.788787, 0.211213, 0.908169, 0.95776, 0.701135, 0.298865, 0.95776, 0.982356, 0.631652, 0.368348, 0.982356, 0.993715, 0.579026, 0.420974, 0.993715, 0.998484, 0.538909, 0.461091, 0.998484, 0.999942, 0.507592, 0.492408, 0.999942, 0.999693, 0.482472, 0.517528, 0.999693, 0.998537, 0.461781, 0.538219, 0.998537, 0.996888, 0.444299, 0.5557, 0.996888, 0.99496, 0.429185, 0.570814, 0.99496, 0.992865, 0.415835, 0.584165, 0.992865, 0.990651, 0.403763, 0.596237, 0.990651, 0.988307, 0.392499, 0.607501, 0.988307, 0.985741, 0.381445, 0.618555, 0.985741, 0.982795, 0.369964, 0.630036, 0.982795 )
+
+[sub_resource type="GDScript" id=34]
+script/source = "tool
+extends Line2D
+
+export var corner_radius : float = 8.0 setget set_corner_radius
+
+var length_until : PoolRealArray = PoolRealArray()
+func _init():
+	if not is_connected(\"draw\", self, \"on_draw\"):
+		connect(\"draw\", self, \"on_draw\")
+
+func set_corner_radius(value : float):
+	corner_radius = max(value, 0.0)
+
+func on_draw():
+	if not Engine.editor_hint:
+		return
+#	print(\"updating\")
+	if points.size() < 2:
+		return
+	var length = calculate_length()
+	var new_gradient = Gradient.new()
+	var tg : Vector2 = (points[1] - points[0]).normalized()
+	var bn : Vector2 = tg.rotated(PI*0.5)
+	new_gradient.set_color(0, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5))
+	tg = (points[-1] - points[-2]).normalized()
+	bn = tg.rotated(PI*0.5)
+	new_gradient.set_color(1, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5));
+#	for i in points.size() - 1:
+#		var idx = i + 1;
+#		tg = (points[idx] - points[idx - 1]).normalized()
+#		bn = tg.rotated(PI*0.5)
+#		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+#		var seg_length = length_until[idx] - length_until[idx - 1]
+#		if seg_length <= 2.0*corner_radius:
+#			new_gradient.add_point((length_until[idx] - seg_length*0.5)/length, color_value)
+#		else:
+#			new_gradient.add_point((length_until[idx - 1] + corner_radius)/length, color_value)
+#			new_gradient.add_point((length_until[idx] - corner_radius)/length, color_value)
+	for i in points.size() - 2:
+		var idx = i + 1;
+		var tg_a = (points[idx] - points[idx - 1]).normalized()
+		var tg_b = (points[idx + 1] - points[idx]).normalized()
+		tg = (tg_a + tg_b).normalized()
+		bn = tg.rotated(PI*0.5)
+		var offset = length_until[idx]/length
+		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+		new_gradient.add_point(offset, color_value)
+	gradient = new_gradient
+	(material as ShaderMaterial).set_shader_param(\"UVX_SCALE\", round(length/(width*PI*0.5)))
+	pass
+
+
+func calculate_length() -> float:
+	var result : float = 0.0
+	length_until.resize(points.size())
+	length_until[0] = 0.0
+	for i in points.size() - 1:
+		result += points[i].distance_to(points[i + 1])
+		length_until[i + 1] = result
+	return result
+"
+
+[sub_resource type="Curve2D" id=35]
+bake_interval = 8.0
+_data = {
+"points": PoolVector2Array( 0, 61.3518, 0, -61.3518, 344, 216, -24.8198, 1.16205, 67.5672, -3.16345, 360, 72, -0.471937, -97.691, 0.471937, 97.691, 488, 200, 52.8149, -2.82937, -26.4285, 1.41581, 360, 328, 0, 61.3518, 0, 0, 344, 216 )
+}
+
+[sub_resource type="GDScript" id=36]
+script/source = "tool
+extends Path2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+export var closed_path : bool = true
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+
+func _on_Path2D_draw():
+	var points = curve.get_baked_points()
+	if closed_path:
+		var last = curve.get_point_count() - 1
+		if last > 2:
+			curve.set_point_in(last, -curve.get_point_out(0))
+			curve.set_point_position(last, curve.get_point_position(0))
+		points[-2] = points[-1] + curve.get_point_in(last).normalized()*points[-1].distance_to(points[-2])
+		points.insert(1, points[0] + curve.get_point_out(0).normalized()*points[1].distance_to(points[0])*0.5)
+	$Line2D.points = points
+	pass # Replace with function body.
+"
+
+[sub_resource type="ShaderMaterial" id=37]
+shader = ExtResource( 8 )
+shader_param/INDEX_TRLB = Plane( 0, 1, 2, 3 )
+shader_param/UVX_SCALE = 14.0
+shader_param/COLOR_ARRAY = ExtResource( 3 )
+shader_param/NORMAL_ARRAY = ExtResource( 5 )
+shader_param/DEPTH_PACKED = ExtResource( 6 )
+
+[sub_resource type="Gradient" id=46]
+offsets = PoolRealArray( 0, 1, 0.00585846, 0.0117171, 0.0234296, 0.0351562, 0.046856, 0.0585776, 0.0702883, 0.0820387, 0.0937909, 0.105502, 0.117225, 0.128942, 0.140682, 0.152406, 0.164129, 0.175854, 0.187592, 0.199315, 0.211038, 0.22275, 0.234494, 0.246243, 0.257959, 0.269668, 0.281395, 0.293118, 0.304848, 0.316554, 0.328266, 0.339998, 0.351721, 0.363441, 0.37514, 0.38688, 0.398582, 0.410291, 0.422017, 0.433722, 0.445417, 0.457168, 0.468867, 0.480565, 0.492278, 0.504022, 0.515751, 0.527486, 0.539244, 0.550932, 0.56265, 0.574346, 0.586081, 0.597817, 0.609531, 0.62127, 0.632998, 0.644718, 0.65644, 0.668174, 0.679874, 0.691626, 0.703347, 0.715052, 0.726775, 0.738512, 0.750223, 0.761939, 0.773653, 0.785371, 0.797087, 0.808824, 0.82054, 0.832264, 0.844, 0.855728, 0.867464, 0.87918, 0.89091, 0.90264, 0.914345, 0.92606, 0.937799, 0.949524, 0.961243, 0.972959, 0.984668, 0.996398 )
+colors = PoolColorArray( 0.5, 0, 1, 0.5, 0.5, 0, 1, 0.5, 0.497165, 8.01682e-06, 0.999992, 0.497166, 0.493439, 4.30346e-05, 0.999957, 0.493439, 0.490914, 8.25524e-05, 0.999917, 0.490914, 0.488238, 0.000138372, 0.999862, 0.488238, 0.486681, 0.000177413, 0.999823, 0.486681, 0.486161, 0.00019154, 0.999808, 0.486161, 0.486664, 0.00017789, 0.999822, 0.486664, 0.488222, 0.00013873, 0.999861, 0.488222, 0.490924, 8.23438e-05, 0.999918, 0.490924, 0.494944, 2.55406e-05, 0.999974, 0.494944, 0.500548, 2.98023e-07, 1, 0.500548, 0.508174, 6.6787e-05, 0.999933, 0.508174, 0.518535, 0.000343651, 0.999656, 0.518535, 0.532811, 0.00107768, 0.998922, 0.532811, 0.55316, 0.00283399, 0.997166, 0.55316, 0.583956, 0.00709909, 0.992901, 0.583957, 0.635386, 0.0186782, 0.981322, 0.635386, 0.73466, 0.0584861, 0.941514, 0.73466, 0.906819, 0.209314, 0.790686, 0.906819, 0.993525, 0.419794, 0.580206, 0.993525, 0.999991, 0.502984, 0.497016, 0.999991, 0.999295, 0.52655, 0.47345, 0.999295, 0.997323, 0.551669, 0.448331, 0.997323, 0.993807, 0.578449, 0.421551, 0.993807, 0.988425, 0.60696, 0.39304, 0.988425, 0.980817, 0.637168, 0.362832, 0.980817, 0.970606, 0.668907, 0.331093, 0.970606, 0.957435, 0.701874, 0.298126, 0.957435, 0.940989, 0.735644, 0.264356, 0.940989, 0.921076, 0.76962, 0.23038, 0.921076, 0.897728, 0.803005, 0.196995, 0.897728, 0.871228, 0.834947, 0.165053, 0.871228, 0.842072, 0.864673, 0.135327, 0.842072, 0.810966, 0.891535, 0.108465, 0.810966, 0.778776, 0.915071, 0.0849286, 0.778775, 0.746329, 0.935112, 0.0648883, 0.746329, 0.714356, 0.951721, 0.0482794, 0.714356, 0.68349, 0.965114, 0.0348857, 0.68349, 0.654125, 0.975653, 0.0243472, 0.654125, 0.626493, 0.983735, 0.016265, 0.626493, 0.60077, 0.98974, 0.0102599, 0.60077, 0.576966, 0.994041, 0.00595936, 0.576966, 0.554977, 0.996968, 0.0030317, 0.554977, 0.534709, 0.998794, 0.00120619, 0.534709, 0.516012, 0.999744, 0.000256479, 0.516012, 0.49676, 0.99999, 1.04904e-05, 0.49676, 0.47479, 0.999364, 0.000635982, 0.47479, 0.450463, 0.99754, 0.00246003, 0.450463, 0.424268, 0.994231, 0.00576857, 0.424268, 0.396228, 0.989113, 0.0108871, 0.396228, 0.366463, 0.981838, 0.0181619, 0.366463, 0.335266, 0.972083, 0.0279168, 0.335266, 0.303071, 0.959586, 0.0404144, 0.303071, 0.270402, 0.944168, 0.0558324, 0.270402, 0.237935, 0.925819, 0.0741808, 0.237935, 0.206385, 0.90471, 0.0952899, 0.206385, 0.176406, 0.881165, 0.118835, 0.176406, 0.148593, 0.855687, 0.144313, 0.148593, 0.12336, 0.828849, 0.171151, 0.123359, 0.100919, 0.801221, 0.198779, 0.100919, 0.0813608, 0.773388, 0.226612, 0.0813608, 0.0645982, 0.745816, 0.254184, 0.0645982, 0.0504127, 0.718795, 0.281205, 0.0504127, 0.038565, 0.692556, 0.307444, 0.038565, 0.0287987, 0.66724, 0.332759, 0.0287988, 0.0208428, 0.642858, 0.357142, 0.0208428, 0.0144509, 0.61934, 0.38066, 0.0144509, 0.00941306, 0.596563, 0.403437, 0.00941306, 0.00555477, 0.574323, 0.425677, 0.00555477, 0.00274837, 0.552353, 0.447647, 0.00274837, 8.57413e-05, 0.490741, 0.50926, 8.57413e-05, 0.0444593, 0.293887, 0.706113, 0.0444593, 0.211446, 0.0916661, 0.908334, 0.211446, 0.358313, 0.0204953, 0.979505, 0.358313, 0.432745, 0.00454381, 0.995456, 0.432745, 0.471696, 0.000801802, 0.999198, 0.471696, 0.494029, 3.56436e-05, 0.999964, 0.494029, 0.50735, 5.40018e-05, 0.999946, 0.507351, 0.515148, 0.000229478, 0.999771, 0.515148, 0.519233, 0.000370026, 0.99963, 0.519233, 0.520627, 0.000425637, 0.999574, 0.520627, 0.519928, 0.000397295, 0.999603, 0.519928, 0.51752, 0.000307024, 0.999693, 0.51752, 0.513646, 0.000186235, 0.999814, 0.513646, 0.508619, 7.42674e-05, 0.999926, 0.508619, 0.502937, 8.61287e-06, 0.999991, 0.502937 )
+
+[sub_resource type="GDScript" id=39]
+script/source = "tool
+extends Line2D
+
+export var corner_radius : float = 8.0 setget set_corner_radius
+
+var length_until : PoolRealArray = PoolRealArray()
+func _init():
+	if not is_connected(\"draw\", self, \"on_draw\"):
+		connect(\"draw\", self, \"on_draw\")
+
+func set_corner_radius(value : float):
+	corner_radius = max(value, 0.0)
+
+func on_draw():
+	if not Engine.editor_hint:
+		return
+#	print(\"updating\")
+	if points.size() < 2:
+		return
+	var length = calculate_length()
+	var new_gradient = Gradient.new()
+	var tg : Vector2 = (points[1] - points[0]).normalized()
+	var bn : Vector2 = tg.rotated(PI*0.5)
+	new_gradient.set_color(0, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5))
+	tg = (points[-1] - points[-2]).normalized()
+	bn = tg.rotated(PI*0.5)
+	new_gradient.set_color(1, Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5));
+#	for i in points.size() - 1:
+#		var idx = i + 1;
+#		tg = (points[idx] - points[idx - 1]).normalized()
+#		bn = tg.rotated(PI*0.5)
+#		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+#		var seg_length = length_until[idx] - length_until[idx - 1]
+#		if seg_length <= 2.0*corner_radius:
+#			new_gradient.add_point((length_until[idx] - seg_length*0.5)/length, color_value)
+#		else:
+#			new_gradient.add_point((length_until[idx - 1] + corner_radius)/length, color_value)
+#			new_gradient.add_point((length_until[idx] - corner_radius)/length, color_value)
+	for i in points.size() - 2:
+		var idx = i + 1;
+		var tg_a = (points[idx] - points[idx - 1]).normalized()
+		var tg_b = (points[idx + 1] - points[idx]).normalized()
+		tg = (tg_a + tg_b).normalized()
+		bn = tg.rotated(PI*0.5)
+		var offset = length_until[idx]/length
+		var color_value = Color(tg.x*0.5 + 0.5, tg.y*0.5 + 0.5, bn.x*0.5 + 0.5, bn.y*0.5 + 0.5)
+		new_gradient.add_point(offset, color_value)
+	gradient = new_gradient
+	(material as ShaderMaterial).set_shader_param(\"UVX_SCALE\", round(length/(width*PI*0.5)))
+	pass
+
+
+func calculate_length() -> float:
+	var result : float = 0.0
+	length_until.resize(points.size())
+	length_until[0] = 0.0
+	for i in points.size() - 1:
+		result += points[i].distance_to(points[i + 1])
+		length_until[i + 1] = result
+	return result
+"
+
+[node name="Normal" type="Node2D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.4, 0.4, 0.4, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
+
+[node name="FollowLight" type="Light2D" parent="."]
+position = Vector2( 512, 192 )
+texture = ExtResource( 1 )
+color = Color( 1, 0.964706, 0.682353, 1 )
+range_height = 64.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LightSoft" type="Sprite" parent="FollowLight"]
+scale = Vector2( 0.02, 0.02 )
+texture = ExtResource( 1 )
+
+[node name="Lights" type="Node2D" parent="."]
+position = Vector2( 512, 192 )
+
+[node name="Primary" type="Light2D" parent="Lights"]
+position = Vector2( 0, -1024 )
+texture = ExtResource( 1 )
+texture_scale = 4.0
+color = Color( 1, 0.964706, 0.682353, 1 )
+energy = 1.5
+range_height = 64.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LightSoft" type="Sprite" parent="Lights/Primary"]
+scale = Vector2( 0.02, 0.02 )
+texture = ExtResource( 1 )
+
+[node name="Secondary" type="Light2D" parent="Lights"]
+light_mask = 2
+position = Vector2( 512, 0 )
+texture = ExtResource( 1 )
+texture_scale = 4.0
+color = Color( 0.4, 0.6, 1, 1 )
+energy = 0.5
+range_height = 32.0
+range_item_cull_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LightSoft" type="Sprite" parent="Lights/Secondary"]
+light_mask = 2
+scale = Vector2( 0.02, 0.02 )
+texture = ExtResource( 1 )
+
+[node name="Secondary3" type="Light2D" parent="Lights"]
+light_mask = 2
+position = Vector2( -512, 0 )
+texture = ExtResource( 1 )
+texture_scale = 4.0
+color = Color( 0.4, 0.6, 1, 1 )
+energy = 0.5
+range_height = 32.0
+range_item_cull_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LightSoft" type="Sprite" parent="Lights/Secondary3"]
+light_mask = 2
+scale = Vector2( 0.02, 0.02 )
+texture = ExtResource( 1 )
+
+[node name="Secondary2" type="Light2D" parent="Lights"]
+light_mask = 2
+position = Vector2( 0, 512 )
+texture = ExtResource( 1 )
+texture_scale = 4.0
+color = Color( 0.4, 0.6, 1, 1 )
+energy = 0.5
+range_height = 32.0
+range_item_cull_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LightSoft" type="Sprite" parent="Lights/Secondary2"]
+light_mask = 2
+scale = Vector2( 0.02, 0.02 )
+texture = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 8 )
+anims/RESET = SubResource( 9 )
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="L" type="Path2D" parent="Lines"]
+curve = SubResource( 6 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+closed_path = false
+
+[node name="Line2D" type="Line2D" parent="Lines/L"]
+light_mask = 3
+material = SubResource( 10 )
+points = PoolVector2Array( 64, 64, 61.5671, 71.6275, 59.2347, 79.2696, 56.9776, 86.931, 54.7891, 94.6128, 52.6625, 102.332, 50.6102, 110.043, 48.6243, 117.778, 46.7024, 125.557, 44.8611, 133.323, 43.0928, 141.124, 41.4072, 148.937, 39.8064, 156.778, 38.2982, 164.638, 36.8909, 172.514, 35.588, 180.436, 34.4054, 188.375, 33.3591, 196.298, 32.4552, 204.268, 31.7159, 212.252, 31.163, 220.242, 30.8218, 228.258, 30.7273, 236.25, 30.9208, 244.247, 31.4561, 252.206, 32.4089, 260.143, 33.8746, 267.99, 35.9867, 275.689, 38.9237, 283.118, 42.9081, 290.06, 48.1232, 296.115, 54.2328, 301.266, 60.838, 305.807, 67.7956, 309.725, 75.0687, 313.083, 82.5554, 315.908, 90.2069, 318.25, 97.9592, 320.152, 105.806, 321.662, 113.707, 322.815, 121.672, 323.646, 129.652, 324.18, 137.642, 324.443, 145.638, 324.453, 153.62, 324.228, 161.611, 323.779, 169.571, 323.116, 177.518, 322.238, 185.436, 321.135, 192, 320 )
+width = 32.0
+gradient = SubResource( 40 )
+texture_mode = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="I" type="Path2D" parent="Lines"]
+position = Vector2( 152, 0 )
+curve = SubResource( 12 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+closed_path = false
+
+[node name="Line2D" type="Line2D" parent="Lines/I"]
+light_mask = 3
+material = SubResource( 13 )
+points = PoolVector2Array( 64, 64, 64, 72.0132, 64, 80.0043, 64, 88.0148, 64, 95.9953, 64, 103.972, 64, 111.986, 64, 119.959, 64, 127.956, 64, 135.923, 64, 143.929, 64, 151.957, 64, 159.926, 64, 167.904, 64, 175.894, 64, 183.867, 64, 191.869, 64, 199.833, 64, 207.808, 64, 215.801, 64, 223.783, 64, 231.792, 64, 239.825, 64, 247.804, 64, 255.78, 64, 263.788, 64, 271.773, 64, 279.747, 64, 287.746, 64, 295.732, 64, 303.743, 64, 311.744, 64, 319.746, 64, 320 )
+width = 32.0
+gradient = SubResource( 41 )
+texture_mode = 2
+script = SubResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="N" type="Path2D" parent="Lines"]
+position = Vector2( 208, 0 )
+curve = SubResource( 16 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+closed_path = false
+
+[node name="Line2D" type="Line2D" parent="Lines/N"]
+light_mask = 3
+material = SubResource( 17 )
+points = PoolVector2Array( 64, 320, 62.5218, 312.143, 61.1322, 304.258, 59.812, 296.359, 58.559, 288.468, 57.3697, 280.581, 56.2376, 272.657, 55.1661, 264.712, 54.1597, 256.769, 53.2231, 248.854, 52.3544, 240.932, 51.5517, 232.952, 50.827, 224.992, 50.1817, 217.019, 49.6207, 209.03, 49.1503, 201.017, 48.7809, 193.048, 48.5168, 185.038, 48.3695, 177.014, 48.351, 169.044, 48.4741, 161.045, 48.7557, 153.05, 49.2136, 145.098, 49.8767, 137.122, 50.7776, 129.141, 51.945, 121.249, 53.4321, 113.417, 55.3097, 105.649, 57.6612, 98.0061, 60.612, 90.5439, 64.2879, 83.4491, 68.8832, 76.9069, 74.5625, 71.2796, 81.371, 67.0387, 89.0031, 64.6104, 96.9938, 64.0177, 104.919, 65.1499, 112.292, 68.2405, 118.576, 73.1637, 123.582, 79.3991, 127.45, 86.417, 130.42, 93.8726, 132.702, 101.551, 134.463, 109.345, 135.831, 117.243, 136.888, 125.196, 137.694, 133.145, 138.305, 141.119, 138.759, 149.096, 139.089, 157.1, 139.321, 165.127, 139.476, 173.106, 139.577, 181.115, 139.641, 189.126, 139.687, 197.146, 139.732, 205.148, 139.793, 213.178, 139.889, 221.206, 140.038, 229.199, 140.266, 237.229, 140.597, 245.253, 141.063, 253.256, 141.702, 261.246, 142.566, 269.212, 143.717, 277.119, 145.255, 284.985, 147.312, 292.732, 150.074, 300.229, 153.845, 307.295, 158.967, 313.426, 165.653, 317.849, 173.393, 319.855, 181.377, 319.578, 188.927, 316.959, 195.305, 312.128, 200.25, 305.83, 203.965, 298.757, 206.768, 291.241, 208.873, 283.523, 210.455, 275.653, 211.616, 267.743, 212.447, 259.767, 212.999, 251.816, 213.323, 243.834, 213.45, 235.843, 213.406, 227.821, 213.213, 219.843, 212.887, 211.875, 212.442, 203.91, 211.887, 195.904, 211.234, 187.921, 210.492, 179.953, 209.671, 172.027, 208.767, 164.059, 207.789, 156.083, 206.75, 148.169, 205.645, 140.247, 204.478, 132.33, 203.257, 124.44, 201.972, 116.516, 200.642, 108.65, 199.257, 100.787, 197.817, 92.9169, 196.322, 85.0544, 194.774, 77.2173, 193.161, 69.3838, 192, 64 )
+width = 32.0
+gradient = SubResource( 42 )
+texture_mode = 2
+script = SubResource( 19 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="C" type="Path2D" parent="Lines"]
+position = Vector2( 432, 0 )
+curve = SubResource( 20 )
+script = SubResource( 21 )
+__meta__ = {
+"_edit_group_": true
+}
+closed_path = false
+
+[node name="Line2D" type="Line2D" parent="Lines/C"]
+light_mask = 3
+material = SubResource( 22 )
+points = PoolVector2Array( 160, 320, 152.012, 320.193, 144.028, 320.398, 136.045, 320.549, 128.056, 320.574, 120.056, 320.395, 112.066, 319.92, 104.109, 319.049, 96.2331, 317.667, 88.5051, 315.653, 80.9947, 312.882, 73.8569, 309.271, 67.2385, 304.796, 61.2436, 299.487, 55.9683, 293.476, 51.4167, 286.903, 47.5443, 279.904, 44.2909, 272.61, 41.564, 265.069, 39.3044, 257.375, 37.4561, 249.615, 35.9464, 241.754, 34.7404, 233.871, 33.7893, 225.918, 33.0662, 217.93, 32.5453, 209.929, 32.2043, 201.945, 32.0222, 193.953, 31.9998, 185.985, 32.1826, 177.954, 32.5935, 169.958, 33.2558, 162.002, 34.2048, 154.033, 35.4708, 146.11, 37.0895, 138.265, 39.1064, 130.51, 41.556, 122.917, 44.4987, 115.495, 47.9817, 108.31, 52.063, 101.417, 56.7625, 94.93, 62.0876, 88.9453, 68.0167, 83.554, 74.4799, 78.839, 81.4168, 74.8252, 88.7196, 71.5249, 96.2652, 68.9152, 104.005, 66.9257, 111.886, 65.4861, 119.818, 64.5277, 127.787, 63.9678, 135.781, 63.7267, 143.781, 63.7215, 151.772, 63.855, 159.763, 63.9975, 160, 64 )
+width = 32.0
+gradient = SubResource( 43 )
+texture_mode = 2
+script = SubResource( 24 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="-" type="Path2D" parent="Lines"]
+position = Vector2( 432, 0 )
+curve = SubResource( 25 )
+script = SubResource( 26 )
+__meta__ = {
+"_edit_group_": true
+}
+closed_path = false
+
+[node name="Line2D" type="Line2D" parent="Lines/-"]
+light_mask = 3
+material = SubResource( 27 )
+points = PoolVector2Array( 56, 192, 63.9966, 192, 72.005, 192, 80.0034, 192, 88.0024, 192, 96.0009, 192, 104.004, 192, 112.018, 192, 120.007, 192, 128.005, 192, 136.003, 192, 144.012, 192, 152.008, 192, 160, 192 )
+width = 32.0
+gradient = SubResource( 44 )
+texture_mode = 2
+script = SubResource( 29 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="2" type="Path2D" parent="Lines"]
+position = Vector2( 424, -8 )
+curve = SubResource( 30 )
+script = SubResource( 31 )
+__meta__ = {
+"_edit_group_": true
+}
+closed_path = false
+
+[node name="Line2D" type="Line2D" parent="Lines/2"]
+light_mask = 3
+material = SubResource( 32 )
+points = PoolVector2Array( 224, 72, 231.813, 70.2113, 239.669, 68.5911, 247.559, 67.1588, 255.449, 65.9386, 263.415, 64.9425, 271.409, 64.2058, 279.413, 63.7616, 287.436, 63.648, 295.409, 63.9092, 303.4, 64.6031, 311.31, 65.791, 319.132, 67.5542, 326.778, 69.9769, 334.127, 73.1376, 341.076, 77.1301, 347.432, 81.9896, 353.012, 87.7073, 357.653, 94.2084, 361.238, 101.344, 363.729, 108.941, 365.15, 116.829, 365.563, 124.812, 365.054, 132.807, 363.698, 140.699, 361.556, 148.42, 358.679, 155.882, 355.086, 163.022, 350.759, 169.767, 345.675, 175.95, 340.029, 181.6, 333.966, 186.844, 327.649, 191.738, 321.127, 196.393, 314.473, 200.865, 307.762, 205.196, 300.986, 209.465, 294.214, 213.695, 287.438, 217.952, 280.687, 222.28, 274.004, 226.713, 267.453, 231.276, 261.022, 236.055, 254.79, 241.08, 248.83, 246.402, 243.202, 252.098, 238.024, 258.219, 233.455, 264.775, 229.631, 271.803, 226.715, 279.257, 224.832, 287.026, 224.026, 294.982, 224.452, 302.986, 226.649, 310.673, 230.883, 317.472, 236.827, 322.812, 243.849, 326.645, 251.413, 329.222, 259.259, 330.849, 267.214, 331.751, 275.208, 332.094, 283.204, 331.994, 291.175, 331.534, 299.139, 330.772, 307.073, 329.752, 314.988, 328.504, 322.846, 327.059, 330.676, 325.427, 338.459, 323.622, 346.216, 321.634, 352, 320 )
+width = 32.0
+gradient = SubResource( 45 )
+texture_mode = 2
+script = SubResource( 34 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="D" type="Path2D" parent="Lines"]
+position = Vector2( 496, -8 )
+curve = SubResource( 35 )
+script = SubResource( 36 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Line2D" type="Line2D" parent="Lines/D"]
+light_mask = 3
+material = SubResource( 37 )
+points = PoolVector2Array( 344, 216, 344, 212.003, 343.955, 208.006, 343.836, 200.016, 343.664, 192.018, 343.46, 184.038, 343.238, 176.044, 343.017, 168.057, 342.811, 160.043, 342.639, 152.027, 342.521, 144.038, 342.478, 136.04, 342.538, 128.047, 342.74, 120.039, 343.132, 112.05, 343.789, 104.079, 344.832, 96.148, 346.475, 88.3101, 349.155, 80.7746, 353.902, 74.3373, 361.523, 71.9349, 369.534, 71.7999, 377.546, 72.0306, 385.516, 72.6492, 393.437, 73.6814, 401.301, 75.1572, 409.058, 77.1022, 416.68, 79.5448, 424.099, 82.5, 431.287, 85.9912, 438.195, 90.0328, 444.752, 94.613, 450.907, 99.7171, 456.605, 105.307, 461.837, 111.371, 466.544, 117.82, 470.736, 124.62, 474.415, 131.724, 477.585, 139.054, 480.271, 146.567, 482.513, 154.264, 484.318, 162.039, 485.729, 169.894, 486.776, 177.817, 487.488, 185.797, 487.888, 193.789, 488, 201.795, 487.783, 209.814, 487.195, 217.766, 486.201, 225.699, 484.777, 233.55, 482.884, 241.33, 480.502, 248.974, 477.617, 256.427, 474.204, 263.672, 470.27, 270.64, 465.825, 277.287, 460.885, 283.576, 455.475, 289.477, 449.657, 294.942, 443.43, 299.993, 436.883, 304.584, 430.056, 308.727, 422.971, 312.438, 415.67, 315.727, 408.213, 318.597, 400.612, 321.071, 392.899, 323.163, 385.092, 324.886, 377.216, 326.25, 369.273, 327.264, 361.307, 327.925, 353.366, 326.968, 347.399, 321.63, 344.361, 314.227, 342.887, 306.357, 342.211, 298.393, 341.982, 290.393, 342.02, 282.391, 342.217, 274.407, 342.504, 266.42, 342.832, 258.417, 343.164, 250.425, 343.47, 242.436, 343.724, 234.446, 343.906, 226.46, 344, 218.457, 344, 216 )
+width = 32.0
+gradient = SubResource( 46 )
+texture_mode = 2
+script = SubResource( 39 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[connection signal="draw" from="Lines/L" to="Lines/L" method="_on_Path2D_draw"]
+[connection signal="draw" from="Lines/I" to="Lines/I" method="_on_Path2D_draw"]
+[connection signal="draw" from="Lines/N" to="Lines/N" method="_on_Path2D_draw"]
+[connection signal="draw" from="Lines/C" to="Lines/C" method="_on_Path2D_draw"]
+[connection signal="draw" from="Lines/-" to="Lines/-" method="_on_Path2D_draw"]
+[connection signal="draw" from="Lines/2" to="Lines/2" method="_on_Path2D_draw"]
+[connection signal="draw" from="Lines/D" to="Lines/D" method="_on_Path2D_draw"]
